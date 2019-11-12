@@ -17,6 +17,13 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'msci'
+    scannerMode: 'Other'
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -27,16 +34,8 @@ steps:
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    sonarQubeRunAnalysis: false
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'SonarCloud'
-    organization: 'msci'
-    scannerMode: 'MSBuild'
-    projectKey: 'WebGoat'
-    projectName: 'MSCI_POC'
-
-- task: SonarCloudAnalyze@1
+    sonarQubeRunAnalysis: true
+    sqMavenPluginVersionChoice: 'latest'
 
 - task: SonarCloudPublish@1
   inputs:
