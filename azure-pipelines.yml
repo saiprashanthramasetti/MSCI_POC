@@ -42,8 +42,8 @@ steps:
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      -X
       sonar.login=c4fb933c080e3cbc6da3b83712a27e68a2cdfbde
+      --debug
       
 - task: SonarCloudAnalyze@1
 
