@@ -18,6 +18,17 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'msci'
+    scannerMode: 'Other'
+    extraProperties: |
+      # Additional properties that will be passed to the scanner, 
+      # Put one key=value per line, example:
+      # sonar.exclusions=**/*.bin
+      sonar.login=c4fb933c080e3cbc6da3b83712a27e68a2cdfbde
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -28,24 +39,8 @@ steps:
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    sonarQubeRunAnalysis: false
-
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'SonarCloud'
-    organization: 'msci'
-    scannerMode: 'CLI'
-    configMode: 'manual'
-    cliProjectKey: 'devops'
-    cliProjectName: 'DevOps'
-    extraProperties: |
-      # Additional properties that will be passed to the scanner, 
-      # Put one key=value per line, example:
-      # sonar.exclusions=**/*.bin
-      sonar.login=c4fb933c080e3cbc6da3b83712a27e68a2cdfbde
-      --debug
-      
-- task: SonarCloudAnalyze@1
+    sonarQubeRunAnalysis: true
+    sqMavenPluginVersionChoice: 'latest'
 
 - task: SonarCloudPublish@1
   inputs:
