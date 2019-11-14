@@ -44,6 +44,8 @@ steps:
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
       sonar.login=c4fb933c080e3cbc6da3b83712a27e68a2cdfbde
+      
+- task: SonarCloudAnalyze@1
 
 - task: SonarCloudPublish@1
   inputs:
