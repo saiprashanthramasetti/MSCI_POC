@@ -27,8 +27,8 @@ steps:
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.project.key=MSCI-DevOps
-      sonar.projectName=MSCI-DevOps
+      <sonar.projectKey>MSCI-DevOps</sonar.projectKey>
+      <sonar.projectName>MSCI-DevOps</sonar.projectName>
       sonar.verbose=true
 
 - task: Maven@3
