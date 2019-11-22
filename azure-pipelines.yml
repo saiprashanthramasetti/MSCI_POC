@@ -23,26 +23,37 @@ steps:
     SonarCloud: 'SonarCloud'
     organization: 'msci'
     scannerMode: 'Other'
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'msci'
+    scannerMode: 'CLI'
+    configMode: 'file'
     extraProperties: |
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
-      # sonar.exclusions=**/*.bin
-      <sonar.projectKey>MSCI-DevOps</sonar.projectKey>
-      <sonar.projectName>MSCI-DevOps</sonar.projectName>
-      sonar.verbose=true
+      sonar.projectKey=MSCI-DevOps
+      
+      # defaults to project key
+      sonar.projectName=MSCI-DevOps
+      # defaults to 'not provided'
+      sonar.projectVersion=1.0
+      # Path is relative to the sonar-project.properties file. Defaults to .
+      #sonar.sources=.
+      # Encoding of the source code. Default is default system encoding
+      sonar.sourceEncoding=UTF-8
 
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
-    goals: 'clean package'
+    goals: 'clean package verify org.sonarsource.scanner.maven:sonar'
     publishJUnitResults: false
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    sonarQubeRunAnalysis: true
-    sqMavenPluginVersionChoice: 'latest'
+    sonarQubeRunAnalysis: false
 
 - task: SonarCloudPublish@1
   inputs:
