@@ -22,18 +22,12 @@ steps:
   inputs:
     SonarCloud: 'SonarCloud'
     organization: 'msci'
-    scannerMode: 'Other'
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'SonarCloud'
-    organization: 'msci'
     scannerMode: 'CLI'
     configMode: 'file'
     extraProperties: |
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       sonar.projectKey=MSCI-DevOps
-
       # defaults to project key
       sonar.projectName=MSCI-DevOps
       # defaults to 'not provided'
@@ -53,7 +47,8 @@ steps:
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+    sonarQubeRunAnalysis: true
+    sqMavenPluginVersionChoice: 'latest'
 
 - task: SonarCloudPublish@1
   inputs:
