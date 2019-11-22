@@ -33,7 +33,7 @@ steps:
       # Additional properties that will be passed to the scanner, 
       # Put one key=value per line, example:
       sonar.projectKey=MSCI-DevOps
-      
+
       # defaults to project key
       sonar.projectName=MSCI-DevOps
       # defaults to 'not provided'
@@ -46,7 +46,7 @@ steps:
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
-    goals: 'clean package verify org.sonarsource.scanner.maven:sonar'
+    goals: 'clean package'
     publishJUnitResults: false
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
